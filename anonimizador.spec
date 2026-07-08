@@ -1,17 +1,15 @@
-# -*- mode: python ; coding: utf-8 -*-
-# Spec de PyInstaller para generar un ejecutable de escritorio unico
-# (--onefile, sin consola). Generar el binario de Windows requiere ejecutar
-# PyInstaller en una maquina Windows real (no permite cross-compilar);
-# ver build_windows.bat / build_linux.sh.
+from PyInstaller.utils.hooks import collect_submodules
 
 block_cipher = None
+
+hidden_imports = ["dicomanonymizer"] + collect_submodules("dicomanonymizer")
 
 a = Analysis(
     ["main.py"],
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=["dicomanonymizer"],
+    hiddenimports=hidden_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -19,7 +17,6 @@ a = Analysis(
     noarchive=False,
 )
 pyz = PYZ(a.pure)
-
 exe = EXE(
     pyz,
     a.scripts,
