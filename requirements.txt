@@ -1,2 +1,2 @@
 pydicom==3.0.2
-dicom-anonymizer>=1.0.13
+git+https://github.com/KitwareMedical/dicom-anonymizer.git@master#egg=dicom_anonymizer
